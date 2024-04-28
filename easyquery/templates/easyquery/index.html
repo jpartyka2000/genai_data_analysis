@@ -1,0 +1,128 @@
+{% extends "backendBase.html" %}
+{% load static %}
+
+{% comment %} 
+	This is the template for the coach who has successfully logged in.
+{% endcomment%}
+
+
+{% load static %}
+
+{%block mainContent%}	
+	<div class="container" style="border:1px solid #C0C0C0;">
+          {% csrf_token %}
+		<div class='row' style='text-align:center;'>
+            <!--<div style="float:left;">
+				<img style="border-radius:1px;height:60px; width:60px;" src="{% static 'assets/images/imginforlogo.png' %}"/>
+			</div>-->
+			<h1>{{ welcome_message }}</h1></div><br>
+
+            <style>
+                #id_csv_file {
+                    width: 400px;
+                    size: 400px;
+                }
+                
+                #id_list_of_files {
+                    width: 400px;
+                    size: 400px;
+                    height: 20px;
+                    -webkit-appearance: none;
+    				-moz-appearance: none;
+    				text-indent: 1px;
+    				text-overflow: '';
+                }
+
+            </style>
+
+            <fieldset>
+
+{% if Error_message %}
+    <p style="color: red;">
+        {{ Error_message }}
+    </p>
+{% endif %}
+
+<div id="IEWarningSpan" style="text-align:center; font-weight:bold; background-color: #ffff99; color:#cc0000;"></div>
+
+<div style="font-size:18px;text-decoration:underline;">Upload a New Study</div>
+<div id="form_div" style="width:400px;">
+<form name="data_entry_form" action="{% url 'easyquery:create_new_study' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for element in form %}
+       <label for="{{ element.name }}">{{ element.label }}</label>
+       <p>{{ element }}</p><br><br>
+    {% endfor %}<br><br><br><br>
+    
+    <input type="submit" id="submitButton" name="submitButton" value="Upload Data" onclick="checkParameters();return false;"/>
+
+    <table align="center">
+	    <tr>
+	        
+	        <td style="vertical-align: top;">
+	            <img id="easyquery_upload_loading_image" src="{% static 'easyquery/images/loading.gif' %}" alt="Loading" title="Loading" width="100px" style="display: none; margin-top: 20px;"/>
+	        </td>
+	    </tr>
+	</table>
+    
+</form>
+</div>
+
+</fieldset>
+
+    <script language="Javascript">
+
+        var submitButton = document.getElementById("submitButton")
+        
+        function checkParameters() {
+        
+            submitButton.style.visibility = 'hidden'
+
+            var csvFileUpload = document.getElementById("id_csv_file")
+            var fileUpload = csvFileUpload.value
+            
+            //none check
+            if (fileUpload.length < 1) {
+
+                alert("Please upload a CSV file")
+                submitButton.style.visibility = 'visible'
+                return false
+            }
+
+            $("#easyquery_upload_loading_image").show()
+            
+            //if we get here, submit the form
+            var theForm = document.forms[0];
+            theForm.submit()
+            return true;
+        }
+
+        $(window).blur(function() {
+        	
+        	$("#easyquery_upload_loading_image").hide()
+        	
+        });
+        
+
+        //detect if browser is IE or not
+        var ms_ie = false;
+        var ua = window.navigator.userAgent;
+        var old_ie = ua.indexOf('MSIE ');
+        var new_ie = ua.indexOf('Trident/');
+
+        if ((old_ie > -1) || (new_ie > -1)) {
+            ms_ie = true;
+        }
+
+        if ( ms_ie ) {
+            IEspan = document.getElementById("IEWarningSpan")
+            IEspan.innerHTML = "You are currently using Internet Explorer. Please use Chrome or Firefox to utilize the full feature set of EasyQuery."
+
+        }
+
+
+   </script>
+
+
+{% endblock%}
