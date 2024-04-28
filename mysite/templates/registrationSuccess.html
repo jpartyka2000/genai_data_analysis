@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% comment %} 
+	This is the template for registration success
+{% endcomment %}
+
+{% load staticfiles %}
+{% load static %}
+{% load i18n %}
+			
+{% block title %} Infor HCM Science Cloud: Registration Success {% endblock %}
+
+
+{% block identifier %}
+	None 
+{% endblock%}
+
+
+{% block backendNavigation %}
+	<li><a id="pr" href="{% url 'home' %}" >Home</a> </li>
+{% endblock%}
+
+{% csrf_token %}
+
+
+
+{% block mainContent %}
+	<div class="container">
+		<div class='row'><h1>Registration Success</h1></div>
+				<fieldset id="backend" style="height:600px;">
+					<img class="logo" src="{% static 'assets/images/imginforlogo.png' %}"/>
+					<p>Please check your email Inbox for initial instructions for logging on to the site. 
+					   NOTE: The email with your login information may be in your spam box.  
+					   If you do not have an email, please send an email to Damon Bryant, PhD at damon.bryant[at]infor.com.</p>
+				</fieldset>
+	</div>
+{% endblock %}
+
+
+ 

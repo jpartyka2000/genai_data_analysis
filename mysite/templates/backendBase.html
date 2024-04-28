@@ -1,0 +1,174 @@
+{# simple backendBase.html #}
+
+{% comment %} This is the backendBase.html for all users.{% endcomment %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <style>
+        html *
+        {
+            font-family: Helvetica !important;
+        }
+    </style>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="{% static 'mysite/images/xactly_logo.jpeg' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'mysite/images/xactly_logo.jpeg' %}" type="image/x-icon">-->
+
+    <title>  {% block title %} EasyQuery Dev {% endblock %}</title>
+
+
+      <script src="http://code.jquery.com/jquery.js"></script>
+      <!-- Bootstrap core JavaScript -->
+      <script src="{% static 'mysite/bootstrap/js/bootstrap.min.js' %}"></script>
+
+      <!-- Raphael JavaScript -->
+      <script src="{% static 'mysite/js/raphael-min.js' %}"></script>
+
+
+	<!-- Core ilightbox scripts and dependencies -->
+	<script type="text/javascript" src="{% static 'mysite/js/emailVerify.js' %}" charset="utf-8">  </script>
+	<script type="text/javascript" src="{% static 'mysite/ilightbox/js/jquery.requestAnimationFrame.js' %}" charset="utf-8" ></script>
+	<script type="text/javascript" src="{% static 'mysite/ilightbox/js/jquery.mousewheel.js' %}" charset="utf-8" ></script>
+	<script type="text/javascript" src="{% static 'mysite/ilightbox/js/ilightbox.packed.js' %}" charset="utf-8"></script>
+	<script type="text/javascript" src="{% static 'mysite/js/prefixfree.js' %}" charset="utf-8">  </script>
+
+
+
+
+    <!-- Bootstrap core CSS -->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/ilightbox/dark-skin/skin.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/ilightbox/light-skin/skin.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/ilightbox/parade-skin/skin.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/ilightbox/metro-black-skin/skin.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/ilightbox/metro-white-skin/skin.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/ilightbox/mac-skin/skin.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/ilightbox/smooth-skin/skin.css' %}" charset="utf-8">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/ilightbox/css/ilightbox.css' %}" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'mysite/bootstrap/css/bootstrap.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/bootstrap/css/jumbotron.css' %}" charset="utf-8">
+
+	<!--  -->
+    <!-- Custom styles for this template -->
+		{% block stylesheets %}
+
+				<link rel="stylesheet" type="text/css" href="{% static 'mysite/css/base.css' %}"  charset="utf-8">
+
+		{% endblock %}
+
+{#	<script>#}
+{#		$(function() { $( "#tabs" ).tabs(); });#}
+{#	</script>#}
+
+  </head>
+
+	<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #DA8038 ; border-color: #2578A9 ;">
+      <div class="container-fluid">
+          <div style="float:left; margin-top: 2px;">
+              <!--<img src="{% static 'assets/images/imginforlogo.png' %}"/>-->
+          </div>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+          </button>
+
+            <a class="navbar-brand" style="color:white;" href="{% url 'index' %}">Jeff Dev Cloud</a>
+        </div><!--/.navbar-header -->
+
+        <div class="navbar-collapse collapse">
+
+          {% comment %}
+          <ul class="nav navbar-nav">
+			{% block backendNavigation %}
+
+				{% block satool %}<li><a href="{% url 'satool:dataentry' %}">Study Aggregation</a></li>{% endblock %}
+
+				{% block contact %}<li><a href="{% url 'login' %}">Contact</a></li>{% endblock %}
+
+			{% endblock %}
+          </ul>
+          {% endcomment %}
+
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" style="color:white;" data-toggle="dropdown" role="button" aria-expanded="false">App List <span class="caret" style="border-top:4px solid white;"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        {% block easyquery %}<li><a href="{% url 'easyquery:index' %}">EasyQuery</a></li>{% endblock %}
+                    </ul>
+                </li>
+            </ul>
+
+		  <ul class="nav navbar-nav navbar-right">
+		 {%if auth_user.is_authenticated %}
+            {% block identifier %}
+				<li>
+					<a  href="{%url 'login' %}" style="color: white;">
+						{{ auth_user.first_name }} {{ auth_user.last_name }}
+
+					</a>
+				</li>
+			{% endblock %}
+
+				<li> <a href="{% url 'logout'%}" style="color:white;">
+						Logout
+					</a>
+				</li>
+         {%else%}
+
+
+				{% block login %}<li><a style="color:white;" href="{% url 'login' %}">Login</a></li>{% endblock %}
+
+{%endif %}
+		  </ul>
+
+
+
+        </div><!--/.navbar-collapse -->
+      </div><!--/.container -->
+    </div><!--/.navbar navbar-inverse navbar-fixed-top -->
+	{% comment %}
+    <div>
+		<p style="color: red;text-align:center;font-weight: bold;">NOTE: We are adding new features to our site. You may experience site errors over the next 24 hours.</p>
+	</div>
+	{% endcomment %}
+
+
+        {% block mainContent%}
+			<fieldset class="container">
+				<legend>This is baseline content</legend>
+			</fieldset>
+		{% endblock %}
+
+		<div class="container">
+			<div class='row'>
+				<footer>
+					<!--<p class='text-center'>
+					<!-- <img  src="{% static 'assets/images/logoLarge2.jpg' %}" style='position:relative; width:100px;height: 100px;padding: 0 10px;'/><br/>
+                    17th Street, Suite 1700, Denver, CO 80230  <br/>
+					Copyright &copy; 2023 Xactly Corp  All Rights Reserved | <a href="{% url 'index'%}" >Terms of Use / Privacy</a>
+					</p>-->
+				</footer>
+			</div>
+			<div class='row'>
+
+			</div>
+		</div>
+
+	</body>
+</html>

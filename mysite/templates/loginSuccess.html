@@ -1,0 +1,60 @@
+{% extends "backendBase.html" %}
+
+{% comment %} 
+	This is the template for the coach who has successfully logged in.
+{% endcomment%}
+
+
+
+{% load staticfiles %}
+{% load static %}
+
+{% block login %}<li class='active'><a href="{% url 'login' %}">User Overview</a></li>{% endblock %}
+
+{%block mainContent%}	
+	<div class="container" style="border:1px solid #C0C0C0;">
+		<div class='row' style='text-align:center;'>
+            <div style="float:left;">
+				<img style="border-radius:1px;height:60px; width:60px;" src="{% static 'assets/images/xactly_logo.jpeg' %}"/>
+			</div><h1>User</h1></div>
+		<div class='row'>
+
+
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <div class="row">
+			<p>
+				<span style="font-size:25px; font-weight:bold;">
+{% if auth_user.first_name %}
+					{{auth_user.first_name}}
+{%else%}
+					Name: First
+{% endif %}
+
+{% if auth_user.last_name %}
+				 	{{auth_user.last_name}}
+{%else%}
+					Last
+{% endif %}
+				</span> 
+				<a href="{%url 'login' %}">Edit</a><br/>
+			</p>
+
+			<hr/> 
+			<p>Role:<span style="font-weight:bold;"> {{auth_user.permission}}</span>
+
+			</p>
+<br/>
+<hr/>
+		<fieldset>
+			<legend><span style="font-weight:bold;"> User Authorizations</span></legend>
+			<p style="font-size:15px;">
+
+			</p>
+		</fieldset>
+		</div>
+
+	</div>
+{% endblock%}   

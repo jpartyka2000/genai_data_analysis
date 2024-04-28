@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+{% block login %}   <li class="active"><a href="{% url 'login' %}">Login</a></li> {% endblock %}
+
+{%block mainContent %}
+<fieldset style=" height: 475px; text-decoration-color:black;">
+<div id="cIt" style=" width: 280px; height: 499px; margin-left:auto; margin-right:auto; display:block; display:table; #position:relative; overflow:hidden;">
+					<div style=" #position: absolute; #top: 50%; display: table-cell; vertical-align: middle;">
+					   <div id="cIt2" style=" #position: relative; #top: -50%;">
+					      <form id="loginForm" name="loginForm" action="{% url 'login' %}" method="post" >
+                                                {% csrf_token %}
+
+						<input id="pageId" name="pageId" type="hidden" value="login"/>
+						<input name='verify' id='verify' type='hidden' value='0' />
+						<ul id="loginContent" name="loginContent"  style="width:250px;">
+
+
+	                      	<li >
+
+{% if form.username.errors %}
+								<span style=' color:red;'> {{ form.username.errors}}</span><br/>
+{% endif %}
+								<label for="username" style=" color:black;font-weight:bold;width:85px;border-radius:10px,10px,0px,0px;">Username:</label>
+								<input type="text" id="id_username" name="username" />
+								<span style="color: #cc0000;">*</span>
+
+				  			</li>
+
+                            <li >
+
+								<label for="password" style=" color:black;font-weight:bold;width:85px;border-radius:0px,0px,10px,10px;">Passcode: </label>
+								<input type="password" id="id_password" name="password" /> 
+								<span style="color: #cc0000;">*</span>
+{% if form.password.errors %} 
+								<span style=' color: red;'> {{form.passcode.error}}</span>
+{% endif %}
+				  			</li>
+						</ul>
+						<ul>
+							<li>
+								<input type='submit' class='' id='' onclick='return validateInputs();' value='Login'>
+							</li>
+							<li>
+							</li>
+							
+							<li>
+								<p style="  color:black;font-weight:bold; text-align:center;">Not a Registered User?<br/>
+								<a href="{% url 'register' %}" style=" text-decoration:none;color:black;"> Sign Up By Clicking Here!</a></p>
+								<p style=" color:black;font-weight:bold; text-align:center;">
+									Forgot your password?
+									<a href="{% url 'login' %}" style=" text-decoration:none;color:blue;text-shadow:-3px -3px 4px white;">Reset it!</a>
+								</p>
+							</li>
+						</ul>
+					     </form>
+					  </div>
+					</div>
+				</div>
+                        </fieldset>
+			
+{% endblock %}
+

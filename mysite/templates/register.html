@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% block register %}<li class='active'><a href="{% url 'register'%}" >Register</a></li>{% endblock %}
+	{%block mainContent %}
+                        <fieldset style="  height: 475px; ">
+			 	<div id="cIt" style="width: 280px; height: 499px; margin-left:auto; margin-right:auto; display:block; display:table; #position:relative; overflow:hidden;">
+					<div style=" #position: absolute; #top: 50%; display: table-cell; vertical-align: middle;">
+					   <div id="cIt2" style=" #position: relative; #top: -50%;">
+					      <form id='signUpForm' name='signUpForm' action='/register/' method='post' >
+						{% csrf_token %}
+
+						
+						{% if form.errors%} <span style='color: #cc0000;'>Please correct the following fields.</span> {% endif %}
+					
+						<input id='pageId' name='pageId' type='hidden' value='signUp'/>
+						<ul >
+							<li>
+								{% if form.role.errors %} <span style='color: #cc0000;'> {{form.role.errors}}</span>{% endif %}
+								<label for='role' style=' color:black;font-weight:bold;width:55px;'>Role: </label>
+								<select id='id_role' name='role' style='width:175px;' size='1'>
+	                                					<option selected='selected' value='None'>Describe Yourself</option>
+										                <option value='Behavioral Analyst'>Behavioral Analyst</option>
+														<option value='Behavioral Scientist'>Behavioral Scientist</option>
+														<option value='Client Account Manager'>Client Account Manager</option>
+														<option value='Data Analyst'>Data Analyst</option>
+	                                					<option value='R&D Engineer'>R&D Engineer</option>
+														<option value='R&D Scientist'>R&D Scientist</option>
+														<option value='HCM Personnel'>HCM Personnel</option>
+
+	                                				</select>
+									<span style='color: #cc0000;'>*</span>
+				  			</li>
+
+
+                              	  			<li>
+								{% if form.email.errors %} <span style='color: #cc0000;'> {{form.email.errors}}</span>{% endif %}
+								<label for='email' style=' color:black; font-weight:bold;width:55px;'>Email: </label>
+								<input type='text' id='id_email' name='email' style='width:175px;'/>
+								<span style='color: #cc0000;'>*</span>
+							
+				  			</li>
+							<li>
+								<input type='submit' id='cLogin' class='cLogin'  onclick='return validate3();' value='Sign Up'>
+							</li>
+							<li>
+
+							</li>
+						</ul>
+						</form> 
+						
+					  </div>
+					</div>
+				</div>
+                        </fieldset>
+			
+{% endblock %}

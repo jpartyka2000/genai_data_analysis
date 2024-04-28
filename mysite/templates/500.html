@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% load i18n %}
+{% block title %}Page Unavailable{% endblock %}
+
+
+{% block mainContent %}
+	<div class='container'>
+		<div class='row'><h1>500 Error: Page Unavailable</h1></div>
+				<div id="row" >
+					<img class="logo" src="{% static 'assets/images/imginforlogo.png' %}"/>
+					<p>{% trans "Sorry, but the requested page could not be found." %}</p>
+				</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% load i18n %}
+{% block title %}Forbidden{% endblock %}
+
+
+{% block mainContent %}
+<div class='container'>
+    <div class='row'><h1>403 Forbidden: You do not have authority to access this page!</h1></div>
+    <div id="row" >
+        <img class="logo" src="{% static 'assets/images/imginforlogo.png' %}"/>
+    </div>
+</div>
+{% endblock %}

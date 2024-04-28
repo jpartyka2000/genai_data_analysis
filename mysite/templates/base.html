@@ -1,0 +1,162 @@
+{# simple base.html #}
+
+{% comment %} This is the base.html code for Infor Science Cloud {% endcomment %}
+
+{% load staticfiles %}
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="{% static 'assets/images/xactly_logo.jpeg' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'assets/images/xactly_logo.jpeg' %}" type="image/x-icon">-->
+	<meta name="p:domain_verify" content="9ea7989d91b3403f95cbb1a7357ca938"/>
+
+    <title>  {% block title %} Jeff Dev Environment {% endblock %}</title>
+
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+	
+	
+
+	<script type="text/javascript" src="{% static 'assets/js/emailVerify.js' %}" charset="utf-8" ></script>
+	<script type="text/javascript" src="{% static 'assets/ilightbox/js/jquery.requestAnimationFrame.js' %}" charset="utf-8"></script>
+	<script type="text/javascript" src="{% static 'assets/ilightbox/js/jquery.mousewheel.js' %}" charset="utf-8" ></script>
+	<script type="text/javascript" src="{% static 'assets/ilightbox/js/ilightbox.packed.js' %}" charset="utf-8" ></script>
+	<script type="text/javascript" src="{% static 'assets/js/prefixfree.js' %}" charset="utf-8"></script>	
+
+	<!-- Core ilightbox scripts and dependencies -->
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/ilightbox/dark-skin/skin.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/ilightbox/light-skin/skin.css' %}" charset="utf-8">	
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/ilightbox/parade-skin/skin.css' %}" charset="utf-8">	
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/ilightbox/metro-black-skin/skin.css' %}" charset="utf-8">	
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/ilightbox/metro-white-skin/skin.css' %}" charset="utf-8">	
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/ilightbox/mac-skin/skin.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/ilightbox/smooth-skin/skin.css' %}" charset="utf-8">
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/ilightbox/css/ilightbox.css' %}" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/bootstrap/css/bootstrap.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/bootstrap/css/jumbotron.css' %}" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/base.css' %}" charset="utf-8">
+
+
+	<!-- Bootstrap core CSS -->
+
+    <!-- Custom styles for this template -->
+
+	
+  </head>
+
+  
+  
+
+	<body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=200303886815502";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+          </button>
+
+          
+		<a class="navbar-brand" href="{% url 'index' %}">Jeff Dev Environment</a>
+
+
+        </div><!--/.navbar-header -->
+
+        <div class="navbar-collapse collapse">
+
+		  <ul class="nav navbar-nav navbar-right">
+		 {%if user.is_authenticated %}
+				<li>
+					<a  href="{%url 'login' %}">
+					{% block identifier %}
+						{{  auth_user.group  }}: {{auth_user.first_name}} {{ auth_user.last_name }}
+					{% endblock %}
+					</a>
+				</li>
+				<li> <a href="{% url 'logout'%}" >
+						Logout
+					</a>
+				</li>
+{%else%}
+				{% block register %}<li ><a href="{% url 'register'%}" >Register</a></li>{% endblock %}
+				{% block login %}<li><a href="{% url 'login' %}">Login</a></li>{% endblock %}
+
+{%endif %}
+		  </ul>
+
+
+
+        </div><!--/.navbar-collapse -->
+      </div><!--/.container -->
+    </div><!--/.navbar navbar-inverse navbar-fixed-top -->
+
+			
+			
+          
+
+        {% block mainContent%}
+			<fieldset>
+				<legend>This is baseline content</legend>
+			</fieldset>
+		{% endblock %}
+
+		
+			
+		
+		<div class="container">
+		
+			<div class='row'>
+				<!--<footer>
+					<p class='text-center'>
+					<!-- <img  src="{% static 'assets/images/logoLarge2.jpg' %}" style='position:relative; width:100px;height: 100px;padding: 0 10px;'/><br/>
+                        1125 17th Street, Suite 1700, Denver, CO 80230  <br/>
+					Copyright &copy; 2020 Xactly Corp.  All Rights Reserved | <a href="{% url 'index'%}" >Terms of Use / Privacy</a>
+					</p>
+				</footer>-->
+				
+			</div>
+			<div class='row'>
+				
+			</div>
+		</div>
+					
+					
+		<!-- Bootstrap core JavaScript -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</body>	
+</html>
+

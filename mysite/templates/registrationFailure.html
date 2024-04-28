@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% comment %} 
+	This is the template for registration failure.
+{% endcomment %}
+
+{% load staticfiles %}
+{% load static %}
+{% load i18n %}
+			
+{% block title %} Infor HCM Science Cloud: Registration Failure {% endblock %}
+
+
+{% block identifier %}
+	None 
+{% endblock%}
+
+
+
+{% csrf_token %}
+{% block mainContent %}
+		<div class='container'>
+			<div class='row'><h1>Registration Failure</h1></div>
+			<fieldset id="backend" style="height: 600px;">
+				<img class="logo" src="{% static 'assets/images/logoLarge2.jpg' %}"/>
+				<p>You were not able to be registered for one of two reasons:<br/> (1) Your email was already registered in the database or<br/>
+				   (2) There was a problem in granting you permissions to the site.</p>
+				   
+				<p>If you have already registered, please check your email Inbox for the initial instructions to logging on to the site.<br/> 
+                   NOTE: If you registered earlier, the email with your logon information may be in your spam box.</p>
+				<p>If you need help, please send an email to damon.bryant@infor.com. </p>
+			</fieldset>
+		</div>
+{% endblock %}
+ 

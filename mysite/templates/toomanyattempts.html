@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% load i18n %}
+{% block title %}Too Many Access Attempts!{% endblock %}
+
+
+{% block mainContent %}
+    <div class='container'>
+        <div id="row" style="float:left;">
+            <img style="border-radius:1px;height:60px; width:60px;" src="{% static 'assets/images/imginforlogo.png' %}"/>
+        </div>
+        <div class='row'><h1>Your account has been locked because of too many failed login attempts.</h1></div>
+
+    </div>
+{% endblock %}
